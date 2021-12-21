@@ -1,0 +1,16 @@
+version: '4'
+services:
+    app:
+        image: nginx
+        environment:
+            - WEATHER_API_KEY
+        volumes:
+            - ./templates:/etc/nginx/templates
+        ports:
+            - "80"
+    weather_proxy:
+        build: ./
+        volumes:
+            - .:/usr/share/nginx/html
+        ports:
+            - 80:80
